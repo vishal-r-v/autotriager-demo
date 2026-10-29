@@ -4,9 +4,9 @@ from __future__ import annotations
 
 
 class Cart:
-    def __init__(self, customer_id: str, items: list[dict] = []) -> None:
+    def __init__(self, customer_id: str, items: list[dict] | None = None) -> None:
         self.customer_id = customer_id
-        self.items = items
+        self.items = items if items is not None else []
 
     def add(self, sku: str, qty: int = 1) -> None:
         if qty < 1:
