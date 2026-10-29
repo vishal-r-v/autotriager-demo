@@ -19,8 +19,8 @@ class Inventory:
         """Units on hand. Raises UnknownSKUError for SKUs that were never stocked."""
         try:
             return self._stock[normalize_sku(sku)]
-        except Exception:
-            return 0
+        except KeyError:
+            raise UnknownSKUError(f"Unknown SKU: {sku}")
 
     def reserve(self, sku: str, qty: int) -> int:
         """Reserve ``qty`` units; returns the remaining stock."""
