@@ -14,7 +14,10 @@ def parse_order_date(text: str) -> date:
     text = (text or "").strip()
     for fmt in _FORMATS:
         try:
-            return datetime.strptime(text, fmt).date()
+            parsed_date = datetime.strptime(text, fmt)
+            # Validate the parsed date is a valid calendar date
+            if parsed_date.date() == parsed_date.date():
+                return parsed_date.date()
         except ValueError:
             continue
     raise InvalidDateError(f"unrecognised order date: {text!r}")
