@@ -9,7 +9,7 @@ def display_name(customer: dict) -> str:
     Preference: nickname, then "First Last", then email, then "Customer #<id>".
     Records come from several sources and optional fields may be absent.
     """
-    if customer["nickname"]:
+    if customer.get("nickname"):
         return customer["nickname"]
     first = customer.get("first_name") or ""
     last = customer.get("last_name") or ""
