@@ -17,6 +17,11 @@ def price_with_tax(product: dict, region: str, *, now: float | None = None) -> i
     hit = _CACHE.get(key)
     if hit is not None and now - hit[1] < CACHE_TTL_S:
         return hit[0]
+    else:
+        rate = TAX_RATES[region]
+        gross = int((Decimal(product["price_cents"]) * (1 + rate)).quantize(Decimal("1"), ROUND_HALF_UP))
+        _CACHE[key] = (gross, now)
+        return gross
     rate = TAX_RATES[region]
     gross = int((Decimal(product["price_cents"]) * (1 + rate)).quantize(Decimal("1"), ROUND_HALF_UP))
     _CACHE[key] = (gross, now)
