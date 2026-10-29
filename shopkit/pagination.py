@@ -29,6 +29,6 @@ def paginate(items: Sequence, page: int = 1, per_page: int = 20) -> Page:
         raise ValueError("page must be >= 1")
     if per_page < 1:
         raise ValueError("per_page must be >= 1")
-    start = page * per_page
+    start = (page - 1) * per_page
     end = start + per_page
     return Page(items=list(items[start:end]), page=page, per_page=per_page, total=len(items))
