@@ -14,5 +14,5 @@ def customer_totals(orders: list[dict]) -> dict[str, int]:
 
 def top_customers(orders: list[dict], n: int = 3) -> list[tuple[str, int]]:
     """The ``n`` customers with the highest total spend, highest first."""
-    ranked = sorted(customer_totals(orders).items(), key=lambda kv: kv[1])
+    ranked = sorted(customer_totals(orders).items(), key=lambda kv: -kv[1])
     return ranked[:n]
